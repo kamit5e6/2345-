@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Каталог товаров, услуг и новостей горнолыжного курорта SkiResort">
+    <title>SkiResort - Каталог</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ==================== ШАПКА ==================== -->
+    <header class="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">
+                <svg class="logo__icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 2L4 26H28L16 2Z" fill="url(#gradient)" stroke="url(#gradient)" stroke-width="2" />
+                    <defs>
+                        <linearGradient id="gradient" x1="4" y1="2" x2="28" y2="26">
+                            <stop stop-color="#06b6d4" />
+                            <stop offset="1" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo__text">SkiResort</span>
+            </a>
+            <div class="header__actions">
+                <button class="header__icon theme-toggle" id="themeToggle">
+                    <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <svg class="icon-moon hidden" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+                <button class="header__icon cart-icon" id="cartIcon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-icon__count" id="cartCount">0</span>
+                </button>
+                <button class="burger-menu" id="burgerMenu"><span class="burger-line"></span><span
+                        class="burger-line"></span><span class="burger-line"></span></button>
+            </div>
+        </div>
+        <nav class="nav" id="navMenu">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+                <li class="nav__item"><a href="catalog.html" class="nav__link nav__link--active">Каталог</a></li>
+                <li class="nav__item"><a href="hotels.html" class="nav__link">Отели</a></li>
+                <li class="nav__item"><a href="account.html" class="nav__link">Аккаунт</a></li>
+                <li class="nav__item"><button class="nav__link nav__link--auth" id="openAuthModal">Войти</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ==================== 1. АКЦИИ (ВАЖНОЕ) ==================== -->
+        <section class="promo-banner">
+            <div class="container">
+                <span class="badge badge--hot">🔥 Важное</span>
+                <h2 class="promo-title">Раннее бронирование</h2>
+                <p class="promo-text">Скидка до 30% на ски-пассы и аренду при покупке до 1 ноября</p>
+                <a href="#products" class="btn btn--white">Перейти к каталогу</a>
+            </div>
+        </section>
+
+        <!-- ==================== 2. УПРАВЛЕНИЕ (ПОИСК + ФИЛЬТР + СОРТИРОВКА) ==================== -->
+        <section class="catalog-controls section" style="padding-bottom: 10px;">
+            <div class="container">
+                <div class="search-bar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Поиск товаров, услуг, новостей...">
+                </div>
+
+                <div class="catalog-filters">
+                    <div class="filter-tabs">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="product">Товары</button>
+                        <button class="filter-btn" data-filter="service">Услуги</button>
+                        <button class="filter-btn" data-filter="news">Новости</button>
+                    </div>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="default">Сортировка</option>
+                        <option value="price-asc">По цене ↑</option>
+                        <option value="price-desc">По цене ↓</option>
+                        <option value="rating">По рейтингу</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. КАТАЛОГ (24 КАРТОЧКИ) ==================== -->
+        <section class="catalog-products section" id="products">
+            <div class="container">
+                <div class="product-grid">
+
+                    <!-- 1. Товар -->
+                    <a href="product.html?id=1" class="product-card" data-category="product" data-price="2500"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/06b6d4/ffffff?text=Ski+Pass"
+                                alt="Ски-пасс"><span class="badge badge--sale">-20%</span></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Ски-пасс (1 день)</h3>
+                            <p class="product-desc">Безлимитный доступ ко всем трассам</p>
+                            <div class="product-price">2 500 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 2. Услуга -->
+                    <a href="product.html?id=2" class="product-card" data-category="service" data-price="4000"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/3b82f6/ffffff?text=Lesson" alt="Урок"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Урок с инструктором</h3>
+                            <p class="product-desc">Индивидуальное занятие (2 часа)</p>
+                            <div class="product-price">4 000 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 3. Товар -->
+                    <a href="product.html?id=3" class="product-card" data-category="product" data-price="5200"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/f43f5e/ffffff?text=Helmet" alt="Шлем"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Шлем горнолыжный</h3>
+                            <p class="product-desc">Защита головы, размеры S-XL</p>
+                            <div class="product-price">5 200 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 4. Новость -->
+                    <a href="product.html?id=4" class="product-card" data-category="news" data-price="0"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/10b981/ffffff?text=News" alt="Новость"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Открытие трассы «Орёл»</h3>
+                            <p class="product-desc">Новая чёрная трасса для профи</p>
+                            <div class="product-price">Читать</div>
+                            <button class="btn btn--primary btn--sm btn--full">Подробнее</button>
+                        </div>
+                    </a>
+
+                    <!-- 5. Товар -->
+                    <a href="product.html?id=5" class="product-card" data-category="product" data-price="3800"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/f59e0b/ffffff?text=Goggles" alt="Маска"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Маска защитная</h3>
+                            <p class="product-desc">Антизапотевающая линза, UV400</p>
+                            <div class="product-price">3 800 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 6. Услуга -->
+                    <a href="product.html?id=6" class="product-card" data-category="service" data-price="3500"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/8b5cf6/ffffff?text=SPA" alt="SPA"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">SPA-комплекс</h3>
+                            <p class="product-desc">Бассейн, сауна, массаж 1 час</p>
+                            <div class="product-price">3 500 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 7. Товар -->
+                    <a href="product.html?id=7" class="product-card" data-category="product" data-price="1500"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ec4899/ffffff?text=Gloves" alt="Перчатки">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Перчатки Pro</h3>
+                            <p class="product-desc">Водонепроницаемые, тёплые</p>
+                            <div class="product-price">1 500 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 8. Товар -->
+                    <a href="product.html?id=8" class="product-card" data-category="product" data-price="12000"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/6366f1/ffffff?text=Boots" alt="Ботинки"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Ботинки горные</h3>
+                            <p class="product-desc">Жёсткость 80, карбоновая рама</p>
+                            <div class="product-price">12 000 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 9. Услуга -->
+                    <a href="product.html?id=9" class="product-card" data-category="service" data-price="1200"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Rental" alt="Прокат"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Прокат лыж/сноуборда</h3>
+                            <p class="product-desc">Современное оборудование</p>
+                            <div class="product-price">1 200 ₽/день</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 10. Товар -->
+                    <a href="product.html?id=10" class="product-card" data-category="product" data-price="800"
+                        data-rating="3">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Socks" alt="Носки"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Носки термо</h3>
+                            <p class="product-desc">Шерсть мериноса, антибактериальные</p>
+                            <div class="product-price">800 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 11. Новость -->
+                    <a href="product.html?id=11" class="product-card" data-category="news" data-price="0"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Event" alt="Событие"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Фестиваль снега 2026</h3>
+                            <p class="product-desc">Музыка, еда, соревнования</p>
+                            <div class="product-price">Вход</div>
+                            <button class="btn btn--primary btn--sm btn--full">Подробнее</button>
+                        </div>
+                    </a>
+
+                    <!-- 12. Товар -->
+                    <a href="product.html?id=12" class="product-card" data-category="product" data-price="2100"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Pole" alt="Палки"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Палки лыжные</h3>
+                            <p class="product-desc">Алюминий/карбон, темляк</p>
+                            <div class="product-price">2 100 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 13. Услуга -->
+                    <a href="product.html?id=13" class="product-card" data-category="service" data-price="5000"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Photo" alt="Фото"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Фотосессия на горе</h3>
+                            <p class="product-desc">Профессиональный фотограф</p>
+                            <div class="product-price">5 000 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 14. Товар -->
+                    <a href="product.html?id=14" class="product-card" data-category="product" data-price="600"
+                        data-rating="3">
+                        <div class="product-img-wrapper"><img src="https://via.placeholder.com/300x200/ccc/333?text=Wax"
+                                alt="Мазь"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Мазь для лыж</h3>
+                            <p class="product-desc">Универсальная, -5°C</p>
+                            <div class="product-price">600 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 15. Товар -->
+                    <a href="product.html?id=15" class="product-card" data-category="product" data-price="15000"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Backpack" alt="Рюкзак"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Рюкзак лавинный</h3>
+                            <p class="product-desc">С системой безопасности ABS</p>
+                            <div class="product-price">15 000 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 16. Услуга -->
+                    <a href="product.html?id=16" class="product-card" data-category="service" data-price="3000"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Transfer" alt="Трансфер"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Трансфер из аэропорта</h3>
+                            <p class="product-desc">Микроавтобус, 1.5 часа</p>
+                            <div class="product-price">3 000 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 17. Товар -->
+                    <a href="product.html?id=17" class="product-card" data-category="product" data-price="900"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Balaclava" alt="Балаклава"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Балаклава</h3>
+                            <p class="product-desc">Защита от ветра и холода</p>
+                            <div class="product-price">900 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 18. Товар -->
+                    <a href="product.html?id=18" class="product-card" data-category="product" data-price="1100"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Sunscreen" alt="Крем"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Крем от солнца SPF 50+</h3>
+                            <p class="product-desc">Для высокогорья, водостойкий</p>
+                            <div class="product-price">1 100 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 19. Новость -->
+                    <a href="product.html?id=19" class="product-card" data-category="news" data-price="0"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Weather" alt="Погода"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Прогноз снега на неделю</h3>
+                            <p class="product-desc">Ожидается +40 см снега</p>
+                            <div class="product-price">Читать</div>
+                            <button class="btn btn--primary btn--sm btn--full">Подробнее</button>
+                        </div>
+                    </a>
+
+                    <!-- 20. Услуга -->
+                    <a href="product.html?id=20" class="product-card" data-category="service" data-price="1500"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Repair" alt="Ремонт"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Ремонт оборудования</h3>
+                            <p class="product-desc">Заточка кантов, парафин</p>
+                            <div class="product-price">1 500 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 21. Товар -->
+                    <a href="product.html?id=21" class="product-card" data-category="product" data-price="2200"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Thermos" alt="Термос"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Термос стальной 1л</h3>
+                            <p class="product-desc">Держит тепло 12 часов</p>
+                            <div class="product-price">2 200 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 22. Услуга -->
+                    <a href="product.html?id=22" class="product-card" data-category="service" data-price="3200"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Kids" alt="Дети"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Детская школа катания</h3>
+                            <p class="product-desc">Группы 4-7 лет, инструктор</p>
+                            <div class="product-price">3 200 ₽/день</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 23. Товар -->
+                    <a href="product.html?id=23" class="product-card" data-category="product" data-price="4500"
+                        data-rating="4">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Jacket" alt="Куртка"></div>
+                        <div class="product-info">
+                            <h3 class="product-title">Куртка мембранная</h3>
+                            <p class="product-desc">Дышащая, ветрозащитная</p>
+                            <div class="product-price">4 500 ₽</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                    <!-- 24. Услуга -->
+                    <a href="product.html?id=24" class="product-card" data-category="service" data-price="800"
+                        data-rating="5">
+                        <div class="product-img-wrapper"><img
+                                src="https://via.placeholder.com/300x200/ccc/333?text=Locker" alt="Камера хранения">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Камера хранения</h3>
+                            <p class="product-desc">Индивидуальный сейф</p>
+                            <div class="product-price">800 ₽/день</div>
+                            <button class="btn btn--primary btn--sm btn--full">В корзину</button>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== ФУТЕР ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__column">
+                    <h3 class="footer__title">SkiResort</h3>
+                    <p class="footer__text">Лучший курорт Европы с 1995 года</p>
+                </div>
+                <div class="footer__column">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="index.html" class="footer__link">Главная</a></li>
+                        <li><a href="catalog.html" class="footer__link">Каталог</a></li>
+                        <li><a href="hotels.html" class="footer__link">Отели</a></li>
+                        <li><a href="account.html" class="footer__link">Аккаунт</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2026 SkiResort. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== МОДАЛЬНЫЕ ОКНА ==================== -->
+    <div class="modal" id="cartModal">
+        <div class="modal__overlay" id="cartModalOverlay"></div>
+        <div class="modal__content modal__content--cart">
+            <button class="modal__close" id="cartModalClose">×</button>
+            <h2 class="modal__title">Корзина</h2>
+            <div class="cart-items" id="cartItems">
+                <p style="text-align:center; color:var(--text-muted); padding:20px;">Корзина пуста</p>
+            </div>
+            <div class="cart-footer" style="display:none;" id="cartFooter">
+                <div class="cart-total"><span>Итого:</span><span id="cartTotalPrice">0 ₽</span></div>
+                <!-- Должно быть так: -->
+                <button id="checkoutBtn" class="btn btn--primary btn--full">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Вход -->
+    <div class="modal" id="authModal">
+        <div class="modal__overlay" id="authModalOverlay"></div>
+        <div class="modal__content modal__content--auth">
+            <button class="modal__close" id="authModalClose">×</button>
+            <h2 class="modal__title">Вход</h2>
+
+            <!-- Форма ВХОДА -->
+            <form class="form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Войти</button>
+            </form>
+
+            <!-- Форма РЕГИСТРАЦИИ (скрыта по умолчанию) -->
+            <form class="form hidden" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">ФИО</label>
+                    <input type="text" id="regName" class="form-input" placeholder="Иванов Иван Иванович" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон</label>
+                    <input type="tel" id="regPhone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Зарегистрироваться</button>
+            </form>
+
+            <!-- Ссылки переключения -->
+            <p class="auth-form__switch">Нет аккаунта? <a href="#" id="showRegister"
+                    style="color: var(--primary); font-weight: 700;">Зарегистрироваться</a></p>
+            <p class="auth-form__switch hidden">Есть аккаунт? <a href="#" id="showLogin"
+                    style="color: var(--primary); font-weight: 700;">Войти</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Требуется авторизация -->
+    <div class="modal" id="authRequiredModal">
+        <div class="modal__overlay" id="authRequiredOverlay"></div>
+        <div class="modal__content modal__content--cart" style="text-align: center; padding: 30px;">
+            <button class="modal__close" id="authRequiredClose">×</button>
+            <div style="font-size: 50px; margin-bottom: 15px;">🔒</div>
+            <h3 class="modal__title" style="margin-bottom: 10px;">Требуется авторизация</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 15px;">
+                Пожалуйста, войдите в аккаунт, чтобы оформить заказ.
+            </p>
+            <button class="btn btn--primary btn--full" id="goToLoginBtn">Войти в аккаунт</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

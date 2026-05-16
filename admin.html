@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - SkiResort</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 1. ЭКРАН ВХОДА -->
+    <div id="adminLogin" class="admin-login-container">
+        <div class="admin-login-box">
+            <h2>🔐 Вход в админ-панель</h2>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>Логин</label>
+                    <input type="text" id="adminUser" class="form-input" placeholder="admin" required
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="adminPass" class="form-input" placeholder="admin2026" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Войти</button>
+                <p id="adminError" class="error-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. ПАНЕЛЬ УПРАВЛЕНИЯ (Скрыта до входа) -->
+    <div id="adminPanel" class="admin-wrapper hidden">
+
+        <!-- Шапка -->
+        <header class="admin-header">
+            <h1 class="admin-title">⚙️ Админ-панель</h1>
+            <button id="adminLogout" class="btn btn--danger"> Выйти на главную</button>
+        </header>
+
+        <!-- Навигация (Табы) -->
+        <nav class="admin-nav">
+            <button data-tab="orders">📦 Заказы</button>
+            <button data-tab="bookings">🏨 Бронирования</button>
+            <button data-tab="products">🛍️ Товары</button>
+            <button data-tab="hotels">🏨 Отели</button>
+        </nav>
+
+        <!-- Контент -->
+        <main class="admin-content">
+
+            <!-- Секция: Заказы (Карточки) -->
+            <section id="tab-orders" class="admin-section">
+                <h3>Заказы клиентов</h3>
+                <div class="cards-grid" id="ordersGrid">
+                    <!-- Карточки заказов загружаются через JS -->
+                </div>
+            </section>
+
+            <!-- Секция: Бронирования (Карточки) -->
+            <section id="tab-bookings" class="admin-section">
+                <h3>Бронирования отелей</h3>
+                <div class="cards-grid" id="bookingsGrid">
+                    <!-- Карточки бронирований загружаются через JS -->
+                </div>
+            </section>
+
+            <!-- Секция: Товары -->
+            <section id="tab-products" class="admin-section">
+                <div class="section-header">
+                    <h3>Каталог товаров</h3>
+                    <button class="btn--add" onclick="openProductModal()">+ Добавить товар</button>
+                </div>
+                <div class="cards-grid" id="productsGrid"></div>
+            </section>
+
+            <!-- Секция: Отели -->
+            <section id="tab-hotels" class="admin-section">
+                <div class="section-header">
+                    <h3>Список отелей</h3>
+                    <button class="btn--add" onclick="openHotelModal()">+ Добавить отель</button>
+                </div>
+                <div class="cards-grid" id="hotelsGrid"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Подключение скрипта -->
+
+    <!-- Модальное окно: Добавить/Редактировать товар -->
+    <div id="productModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="productModalTitle">Добавить товар</h3>
+            <form id="productForm">
+                <input type="hidden" id="editProductId">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" id="pTitle" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Цена (₽)</label>
+                    <input type="number" id="pPrice" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Старая цена (₽)</label>
+                    <input type="number" id="pOldPrice" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="pDesc" class="form-input" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>URL картинки</label>
+                    <input type="url" id="pImg" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Есть размеры?</label>
+                    <select id="pHasSizes" class="form-input">
+                        <option value="false">Нет</option>
+                        <option value="true">Да</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn--secondary" onclick="closeProductModal()">Отмена</button>
+                    <button type="submit" class="btn btn--primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Добавить/Редактировать отель -->
+    <div id="hotelModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="hotelModalTitle">Добавить отель</h3>
+            <form id="hotelForm">
+                <input type="hidden" id="editHotelId">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" id="hTitle" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Цена за ночь (₽)</label>
+                    <input type="number" id="hPrice" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Старая цена (₽)</label>
+                    <input type="number" id="hOldPrice" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="hDesc" class="form-input" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>URL картинки</label>
+                    <input type="url" id="hImg" class="form-input" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn--secondary" onclick="closeHotelModal()">Отмена</button>
+                    <button type="submit" class="btn btn--primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkiResort - Бронирование отеля</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header__container">
+            <a href="index.html" class="header__logo">
+                <svg class="logo__icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 2L4 26H28L16 2Z" fill="url(#gradient)" stroke="url(#gradient)" stroke-width="2" />
+                    <defs>
+                        <linearGradient id="gradient" x1="4" y1="2" x2="28" y2="26">
+                            <stop stop-color="#06b6d4" />
+                            <stop offset="1" stop-color="#3b82f6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo__text">SkiResort</span>
+            </a>
+            <div class="header__actions">
+                <button class="header__icon theme-toggle" id="themeToggle">
+                    <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <svg class="icon-moon hidden" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+                <button class="header__icon cart-icon" id="cartIcon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                    </svg>
+                    <span class="cart-icon__count" id="cartCount">0</span>
+                </button>
+                <button class="burger-menu" id="burgerMenu"><span class="burger-line"></span><span
+                        class="burger-line"></span><span class="burger-line"></span></button>
+            </div>
+        </div>
+        <nav class="nav" id="navMenu">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Главная</a></li>
+                <li class="nav__item"><a href="catalog.html" class="nav__link">Каталог</a></li>
+                <li class="nav__item"><a href="hotels.html" class="nav__link">Отели</a></li>
+                <li class="nav__item"><a href="account.html" class="nav__link">Аккаунт</a></li>
+                <li class="nav__item"><button class="nav__link nav__link--auth" id="openAuthModal">Войти</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 1. Галерея отеля -->
+        <section class="product-gallery section">
+            <div class="container">
+                <div class="gallery-slider" id="hotelGallery">
+                    <div class="gallery-item"><img src="" alt="Фото отеля" id="hotelMainImg"></div>
+                </div>
+                <div class="gallery-dots" id="hotelDots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Информация об отеле -->
+        <section class="product-info section" style="padding-top: 0;">
+            <div class="container">
+                <div class="product-header">
+                    <h1 class="product-title" id="hotelTitle">Загрузка...</h1>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text" id="hotelRatingText">5.0 (100 отзывов)</span>
+                    </div>
+                </div>
+
+                <div class="product-price-block">
+                    <span class="price" id="hotelPrice">0 ₽</span>
+                    <span class="old-price" id="hotelOldPrice"></span>
+                    <span style="font-size: 14px; color: var(--text-muted);">/ ночь</span>
+                </div>
+
+                <!-- Даты заезда/выезда -->
+                <div class="dates-selector">
+                    <div class="form-group">
+                        <label class="form-label">Дата заезда</label>
+                        <input type="date" class="form-input" id="checkIn">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Дата выезда</label>
+                        <input type="date" class="form-input" id="checkOut">
+                    </div>
+                </div>
+
+                <button class="btn btn--primary btn--full btn--lg" id="bookHotelBtn">Забронировать</button>
+            </div>
+        </section>
+
+        <!-- 3. Описание и Отзывы -->
+        <section class="product-details section section--gray">
+            <div class="container">
+                <div class="tabs">
+                    <div class="tabs__nav">
+                        <button class="tabs__btn tabs__btn--active" data-tab="desc">Описание</button>
+                        <button class="tabs__btn" data-tab="specs">Характеристики</button>
+                        <button class="tabs__btn" data-tab="reviews">Отзывы</button>
+                    </div>
+                    <div class="tabs__content">
+                        <div class="tabs__panel tabs__panel--active" data-panel="desc">
+                            <p id="hotelDesc">Загрузка описания...</p>
+                        </div>
+                        <div class="tabs__panel" data-panel="specs">
+                            <ul class="specs-list" id="hotelSpecs"></ul>
+                        </div>
+                        <div class="tabs__panel" data-panel="reviews">
+                            <div class="reviews-list" id="hotelReviewsList"></div>
+
+                            <!-- Форма отзыва -->
+                            <div class="add-review-form">
+                                <h4 style="font-size: 18px; margin-bottom: 15px;">Оставить отзыв</h4>
+                                <form id="hotelReviewForm">
+                                    <div class="form-group"><input type="text" id="hotelReviewName" class="form-input"
+                                            placeholder="Ваше имя" required></div>
+                                    <div class="form-group">
+                                        <div class="star-rating">
+                                            <span class="star active" data-value="1">★</span>
+                                            <span class="star active" data-value="2">★</span>
+                                            <span class="star active" data-value="3">★</span>
+                                            <span class="star active" data-value="4">★</span>
+                                            <span class="star active" data-value="5">★</span>
+                                        </div>
+                                        <input type="hidden" id="hotelReviewRating" value="5">
+                                    </div>
+                                    <div class="form-group"><textarea id="hotelReviewText" class="form-textarea"
+                                            rows="3" placeholder="Ваш комментарий..." required></textarea></div>
+                                    <button type="submit" class="btn btn--primary btn--full">Отправить</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__column">
+                    <h3 class="footer__title">SkiResort</h3>
+                    <p class="footer__text">Лучший курорт Европы с 1995 года</p>
+                </div>
+                <div class="footer__column">
+                    <h3 class="footer__title">Разделы</h3>
+                    <ul class="footer__list">
+                        <li><a href="index.html" class="footer__link">Главная</a></li>
+                        <li><a href="catalog.html" class="footer__link">Каталог</a></li>
+                        <li><a href="hotels.html" class="footer__link">Отели</a></li>
+                        <li><a href="account.html" class="footer__link">Аккаунт</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2026 SkiResort. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно: Корзина -->
+    <div class="modal" id="cartModal">
+        <div class="modal__overlay" id="cartModalOverlay"></div>
+        <div class="modal__content modal__content--cart">
+            <button class="modal__close" id="cartModalClose">×</button>
+            <h2 class="modal__title">Корзина</h2>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-footer" id="cartFooter" style="display:none;">
+                <div class="cart-total"><span>Итого:</span><span id="cartTotalPrice">0 ₽</span></div>
+                <button class="btn btn--primary btn--full" id="checkoutBtn">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Модальное окно: Вход -->
+    <div class="modal" id="authModal">
+        <div class="modal__overlay" id="authModalOverlay"></div>
+        <div class="modal__content modal__content--auth">
+            <button class="modal__close" id="authModalClose">×</button>
+            <h2 class="modal__title">Вход</h2>
+
+            <!-- Форма ВХОДА -->
+            <form class="form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Войти</button>
+            </form>
+
+            <!-- Форма РЕГИСТРАЦИИ (скрыта по умолчанию) -->
+            <form class="form hidden" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">ФИО</label>
+                    <input type="text" id="regName" class="form-input" placeholder="Иванов Иван Иванович" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон</label>
+                    <input type="tel" id="regPhone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Зарегистрироваться</button>
+            </form>
+
+            <!-- Ссылки переключения -->
+            <p class="auth-form__switch">Нет аккаунта? <a href="#" id="showRegister" style="color: var(--primary); font-weight: 700;">Зарегистрироваться</a></p>
+            <p class="auth-form__switch hidden">Есть аккаунт? <a href="#" id="showLogin" style="color: var(--primary); font-weight: 700;">Войти</a></p>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Требуется авторизация -->
+    <div class="modal" id="authRequiredModal">
+        <div class="modal__overlay" id="authRequiredOverlay"></div>
+        <div class="modal__content modal__content--cart" style="text-align: center; padding: 30px;">
+            <button class="modal__close" id="authRequiredClose">×</button>
+            <div style="font-size: 50px; margin-bottom: 15px;">🔒</div>
+            <h3 class="modal__title" style="margin-bottom: 10px;">Требуется авторизация</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 15px;">
+                Пожалуйста, войдите в аккаунт, чтобы оформить заказ.
+            </p>
+            <button class="btn btn--primary btn--full" id="goToLoginBtn">Войти в аккаунт</button>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
